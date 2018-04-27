@@ -1,0 +1,683 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment 1 - Tabular Methods}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment 1: Tabular
+Methods}\label{assignment-1-tabular-methods}
+
+Name: Ajitesh Gupta
+
+ID: A53220177
+
+    This exercise requires you to solve a simple grid-world problem called
+'FrozenLake-v0' in OpenAI Gym. We will solve the problem in two
+different ways. First we will solve the problem using dynamic
+programming, thus requiring a model of the system. Second we will do it
+using model-free temporal difference (Q-Learning). Finally, as a bonus
+you may also show it learning using a naive approach called
+hill-climbing.
+
+\subsubsection{Required for all}\label{required-for-all}
+
+\paragraph{Set up environment}\label{set-up-environment}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{gym}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{n}{env} \PY{o}{=} \PY{n}{gym}\PY{o}{.}\PY{n}{make}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FrozenLake\PYZhy{}v0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+    \paragraph{Pre. Test Policy Function}\label{pre.-test-policy-function}
+
+Write a function to test a policy. Return the average rate of successful
+episodes over 100 trials.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{testPolicy}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{policy}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+            \PY{n}{success} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{obs} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+                \PY{n}{done} \PY{o}{=} \PY{n+nb+bp}{False}
+                \PY{k}{while} \PY{o+ow}{not} \PY{n}{done}\PY{p}{:}
+                    \PY{n}{obs}\PY{p}{,} \PY{n}{rew}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{policy}\PY{p}{[}\PY{n}{obs}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{done}\PY{p}{:}
+                        \PY{n}{success}\PY{o}{+}\PY{o}{=} \PY{n}{rew}
+                        \PY{k}{break}
+            \PY{n}{percentSuccess} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{success}\PY{o}{/}\PY{n}{n}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+            \PY{k}{return} \PY{n}{percentSuccess}
+\end{Verbatim}
+
+    \subsection{Model-based Learning}\label{model-based-learning}
+
+\subsubsection{1. Policy Iteration}\label{policy-iteration}
+
+Perform policy iteration on the Frozenlake example.
+
+\paragraph{1.1 Find the system model}\label{find-the-system-model}
+
+First, model \(T(s,a,s')\) and \(R(s,a,s')\) over 100000 randomly
+initializations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{learnModel}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{100000}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+            \PY{n}{nS} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+            \PY{n}{nA} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+            \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{,}\PY{n}{nS}\PY{p}{)}\PY{p}{)}
+            \PY{n}{T} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{,}\PY{n}{nS}\PY{p}{)}\PY{p}{)}
+            \PY{n}{count} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nS}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{action} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nA}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{env}\PY{o}{.}\PY{n}{env}\PY{o}{.}\PY{n}{s} \PY{o}{=} \PY{n}{state}
+                        \PY{n}{new\PYZus{}state}\PY{p}{,} \PY{n}{rew}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{n}{action}\PY{p}{)}
+                        \PY{n}{R}\PY{p}{[}\PY{n}{state}\PY{p}{,}\PY{n}{action}\PY{p}{,}\PY{n}{new\PYZus{}state}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{rew}
+                        \PY{n}{T}\PY{p}{[}\PY{n}{state}\PY{p}{,}\PY{n}{action}\PY{p}{,}\PY{n}{new\PYZus{}state}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{1.0}
+                        \PY{n}{count}\PY{p}{[}\PY{n}{state}\PY{p}{,}\PY{n}{action}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{1.0}
+        
+            \PY{k}{for} \PY{n}{s\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nS}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nA}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{s\PYZus{}j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nS}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{R}\PY{p}{[}\PY{n}{s\PYZus{}i}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{s\PYZus{}j}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{count}\PY{p}{[}\PY{n}{s\PYZus{}i}\PY{p}{,}\PY{n}{a}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{c+c1}{\PYZsh{}max(1,T[s\PYZus{}i,a,s\PYZus{}j])}
+                        \PY{n}{T}\PY{p}{[}\PY{n}{s\PYZus{}i}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{s\PYZus{}j}\PY{p}{]} \PY{o}{/}\PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{count}\PY{p}{[}\PY{n}{s\PYZus{}i}\PY{p}{,}\PY{n}{a}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+            \PY{k}{return} \PY{n}{R}\PY{p}{,}\PY{n}{T}
+        
+        \PY{c+c1}{\PYZsh{}first learn the model    }
+        \PY{p}{[}\PY{n}{R}\PY{p}{,}\PY{n}{T}\PY{p}{]} \PY{o}{=} \PY{n}{learnModel}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{)}
+\end{Verbatim}
+
+    \paragraph{1.2 What does the transition model tell you about the
+stochastic behavior of actions? What does it tell you about the
+stochasticity of the rewards? What would you expect an optimal agent's
+policy to
+do?}\label{what-does-the-transition-model-tell-you-about-the-stochastic-behavior-of-actions-what-does-it-tell-you-about-the-stochasticity-of-the-rewards-what-would-you-expect-an-optimal-agents-policy-to-do}
+
+    ans:
+
+In an ideal cases we would expect the agent to perform the action that
+it is instructed to perform, but this transition model shows us that
+that is not the case here. We see that it performs the wrong action with
+a certain probability. This helps us model a real life situation where
+agents might not behave as exepcted due to various sources of noise.
+This leads to more robust learning.
+
+The rewards function over here is pretty deterministic and is just
+objective based so we only get rewards at the end goal state and it is 0
+everywhere else. The stochasticity in that comes from the slipping.
+Hence we see that from the second last state, we get a certain reward
+for 3 different actions even though only one of them directly leads to
+the goal state. If we were to make the agent go faster towards the goal
+we could provide small penalty for existence at each time step. This
+would lead the agent to the final goal faster.
+
+The optimal agent's policy should be able to reach the goal state as
+fast as possible. But it should at the same time try to avoid going near
+the holes. This is because actions might misfire and hence being near a
+hole can lead to the hole even if the action did not specify it to go
+there. This way it would successfully complete the trip from start to
+end as many times as possible.
+
+    \paragraph{1.3 Write a function for Policy
+Evaluation}\label{write-a-function-for-policy-evaluation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}runPolicyEvaluation:}
+        \PY{k}{def} \PY{n+nf}{runPolicyEvaluation}\PY{p}{(}\PY{n}{policy}\PY{p}{,}\PY{n}{V}\PY{p}{,}\PY{n}{R}\PY{p}{,}\PY{n}{T}\PY{p}{,}\PY{n}{discount\PYZus{}factor}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+            \PY{n}{Vnew} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+            \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{V}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{sp} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{V}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{Vnew}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{T}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{policy}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{,}\PY{n}{sp}\PY{p}{]} \PY{o}{*} \PY{p}{(} \PY{n}{R}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{policy}\PY{p}{[}\PY{n}{s}\PY{p}{]}\PY{p}{,}\PY{n}{sp}\PY{p}{]} \PY{o}{+} \PY{n}{discount\PYZus{}factor}\PY{o}{*}\PY{n}{V}\PY{p}{[}\PY{n}{sp}\PY{p}{]} \PY{p}{)}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+            \PY{k}{return} \PY{n}{Vnew}
+        
+        \PY{k}{def} \PY{n+nf}{extractPolicy}\PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{discount\PYZus{}factor}\PY{p}{)}\PY{p}{:}
+            \PY{n}{nS} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+            \PY{n}{policy\PYZus{}new} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{nS}
+            \PY{k}{for} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{q\PYZus{}sa} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{sp} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{q\PYZus{}sa}\PY{p}{[}\PY{n}{a}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{T}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{sp}\PY{p}{]} \PY{o}{*} \PY{p}{(} \PY{n}{R}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{sp}\PY{p}{]} \PY{o}{+} \PY{n}{discount\PYZus{}factor}\PY{o}{*}\PY{n}{V}\PY{p}{[}\PY{n}{sp}\PY{p}{]} \PY{p}{)}
+                \PY{n}{policy\PYZus{}new}\PY{p}{[}\PY{n}{s}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{q\PYZus{}sa}\PY{p}{)}
+            \PY{k}{return} \PY{n}{policy\PYZus{}new}
+\end{Verbatim}
+
+    \paragraph{1.4 Run Policy iteration.}\label{run-policy-iteration.}
+
+and show a bar graph of successful runs vs iteration on the policy. Use
+a discount factor of 0.98, and terminate policy after 40 iterations of
+policy updates. Plot the percentSuccesses at every iteration (i.e. the
+return of the testPolicy function).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+        \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+        \PY{n}{nS} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{nA} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{discount\PYZus{}factor} \PY{o}{=} \PY{l+m+mf}{0.98}
+        \PY{n}{policy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{n}{nS}\PY{p}{)}
+        \PY{n}{V} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{nS}\PY{p}{)}
+        \PY{n}{iters} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{percentSuccesses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{while} \PY{n}{iters}\PY{o}{\PYZlt{}}\PY{l+m+mi}{40}\PY{p}{:}
+            \PY{n}{Vnew} \PY{o}{=} \PY{n}{runPolicyEvaluation}\PY{p}{(}\PY{n}{policy}\PY{p}{,} \PY{n}{V}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{discount\PYZus{}factor}\PY{p}{)}
+            \PY{n}{policy\PYZus{}new} \PY{o}{=} \PY{n}{extractPolicy}\PY{p}{(}\PY{n}{Vnew}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{discount\PYZus{}factor}\PY{p}{)}
+            \PY{n}{percentSuccesses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testPolicy}\PY{p}{(}\PY{n}{env}\PY{p}{,}\PY{n}{policy\PYZus{}new}\PY{p}{)}\PY{p}{)}
+            \PY{n}{V} \PY{o}{=} \PY{n}{Vnew}
+            \PY{n}{policy} \PY{o}{=} \PY{n}{policy\PYZus{}new}
+            \PY{n}{iters} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+            
+        \PY{c+c1}{\PYZsh{} plot improvement over time}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} E}\PY{l+s+s1}{pisodes Successful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Policy Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}  
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Policy iteration policy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{policy}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('Policy iteration policy:', [0, 3, 0, 3, 0, 0, 0, 0, 3, 1, 0, 0, 0, 2, 1, 0])
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Model-Free Learning}\label{model-free-learning}
+
+    \subsubsection{2 Q Value-Iteration
+(Q-Learning)}\label{q-value-iteration-q-learning}
+
+\paragraph{2.1 Set up a Q learning
+function}\label{set-up-a-q-learning-function}
+
+Set your exploration rate to 1-episode\_num/total\_num\_of\_episodes for
+linear convergence from completely random action selection to a greedy
+policy. Return a set of policies (at 5\%, 10\%,...100\% of the total
+number of episodes) so that in the later section you can perform policy
+evaluation on intermediate Q-tables and show progress.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{runQLearning}\PY{p}{(}\PY{n}{env}\PY{p}{,}\PY{n}{learning\PYZus{}rate}\PY{p}{,}\PY{n}{discount\PYZus{}factor}\PY{p}{,}\PY{n}{num\PYZus{}of\PYZus{}episodes}\PY{p}{,}\PY{n}{Q0}\PY{p}{,}\PY{n}{explore\PYZus{}type}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} code starts here}
+            \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} code ends here}
+            \PY{n}{Q} \PY{o}{=} \PY{n}{Q0}
+            \PY{n}{Q\PYZus{}saved} \PY{o}{=} \PY{p}{[}\PY{n}{Q0}\PY{p}{]}
+            \PY{n}{stage} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}episodes}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{k}{for} \PY{n}{episode} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}episodes}\PY{p}{)}\PY{p}{:}
+                \PY{n}{s} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{reset}\PY{p}{(}\PY{p}{)}
+                \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}env.render()}
+                    \PY{c+c1}{\PYZsh{} Exploration rate}
+                    \PY{k}{if} \PY{n}{explore\PYZus{}type}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{episode}\PY{o}{/}\PY{n}{num\PYZus{}of\PYZus{}episodes}
+                    \PY{k}{elif} \PY{n}{explore\PYZus{}type}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{epsilon} \PY{o}{=} \PY{l+m+mf}{1000.0}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{+}\PY{n}{episode}\PY{p}{)}
+                        
+                    \PY{c+c1}{\PYZsh{} Epsilon\PYZhy{}Greedy policy}
+                    \PY{n}{max\PYZus{}a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{epsilon}\PY{p}{:}
+                        \PY{n}{a} \PY{o}{=} \PY{n}{max\PYZus{}a}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{actions} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}\PY{p}{)} \PY{k}{if} \PY{n}{i}\PY{o}{!=}\PY{n}{max\PYZus{}a}\PY{p}{]}
+                        \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{actions}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        
+                    \PY{c+c1}{\PYZsh{} Make a step}
+                    \PY{n}{s\PYZus{}new}\PY{p}{,} \PY{n}{rew}\PY{p}{,} \PY{n}{done}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{} Update Q\PYZhy{}Values}
+                    \PY{n}{Q}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{a}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{learning\PYZus{}rate}\PY{o}{*}\PY{p}{(}\PY{n}{rew} \PY{o}{+} \PY{n}{discount\PYZus{}factor}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{n}{s\PYZus{}new}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{Q}\PY{p}{[}\PY{n}{s}\PY{p}{,}\PY{n}{a}\PY{p}{]}\PY{p}{)}
+                    
+                    \PY{n}{s} \PY{o}{=} \PY{n}{s\PYZus{}new}
+                    
+                    \PY{c+c1}{\PYZsh{} Break if reached end state}
+                    \PY{k}{if} \PY{n}{done}\PY{p}{:}
+                        \PY{k}{break}
+                
+                \PY{c+c1}{\PYZsh{} Store models at every 10\PYZpc{}}
+                \PY{k}{if} \PY{p}{(}\PY{n}{episode}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{stage}==0:
+                    \PY{n}{Q\PYZus{}saved}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Q}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}save last Q}
+            \PY{k}{return} \PY{n}{Q\PYZus{}saved}
+        
+        \PY{k}{def} \PY{n+nf}{getPolicyFromQ}\PY{p}{(}\PY{n}{Q}\PY{p}{)}\PY{p}{:}
+            \PY{n}{policy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{n}{Q}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Q}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{policy}\PY{p}{[}\PY{n}{state}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{n}{state}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{policy}
+\end{Verbatim}
+
+    \paragraph{2.1 Perform Q-learning.}\label{perform-q-learning.}
+
+Show policies during intermediate phases of Q-learning, at 0, 10\%,
+20\%,...,100\% of the total episodes during training. Set a learning
+rate of 0.98 and a discount factor of 0.95. Start with a zero-filled
+Q-table. Run 10000 episodes. Plot the bar graph of the success rate over
+time to visualize the improvements to success rate the new policies are
+providing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+        \PY{n}{nS} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{nA} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{Q0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{)}\PY{p}{)}
+        \PY{n}{Qs} \PY{o}{=} \PY{n}{runQLearning}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{Q0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{percentSuccesses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{policy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{Q} \PY{o+ow}{in} \PY{n}{Qs}\PY{p}{:}
+            \PY{n}{policy} \PY{o}{=} \PY{n}{getPolicyFromQ}\PY{p}{(}\PY{n}{Q}\PY{p}{)}
+            \PY{n}{percentSuccesses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testPolicy}\PY{p}{(}\PY{n}{env}\PY{p}{,}\PY{n}{policy}\PY{p}{)}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} E}\PY{l+s+s1}{pisodes Successful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear Rate Exploitation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q\PYZhy{}learning (linear) policy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{policy}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('Q-learning (linear) policy:', array([0, 3, 0, 3, 0, 0, 2, 0, 3, 1, 0, 0, 0, 2, 1, 0]))
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{1.4 Log Rate Exploration}\label{log-rate-exploration}
+
+Run Q-learning for a log exploration rate,
+\(\frac{1000}{1000+\text{episode\_num}}\), for 10,000 episodes. Perform
+policy evaluation and plot the success rate over time. You may find
+setting Q0 to a random number initialization helps (set it to something
+very small, i.e. 0.000001*rand(), since setting it to zero sets a fixed
+seed).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+        \PY{n}{nS} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{nA} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+        \PY{n}{Q0} \PY{o}{=} \PY{l+m+mf}{0.000001}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{)}
+        \PY{n}{Qs} \PY{o}{=} \PY{n}{runQLearning}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{Q0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{percentSuccesses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{policy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{Q} \PY{o+ow}{in} \PY{n}{Qs}\PY{p}{:}
+            \PY{n}{policy} \PY{o}{=} \PY{n}{getPolicyFromQ}\PY{p}{(}\PY{n}{Q}\PY{p}{)}
+            \PY{n}{percentSuccesses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{testPolicy}\PY{p}{(}\PY{n}{env}\PY{p}{,}\PY{n}{policy}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} E}\PY{l+s+s1}{pisodes Successful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log Rate Exploitation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q\PYZhy{}learning (log) policy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{policy}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+('Q-learning (log) policy:', array([0, 3, 0, 0, 0, 3, 2, 0, 3, 1, 0, 1, 1, 2, 1, 1]))
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{BONUS: Hill Climbing (25\%, granted only if Parts 1 and 2
+are
+complete)}\label{bonus-hill-climbing-25-granted-only-if-parts-1-and-2-are-complete}
+
+Demonstrate hill climbing, where your Q values are chosen randomly, and
+you save improvements, with new Q values to try as
+\[Q_{test}\leftarrow Q_{best}+rand(S,A)\] Plot the a bar graph with
+x-axis labelling the iteration number when an improvement occurred, and
+y axis as the \% of successful episodes. Run on N = 1000 iterations of
+hill climbing, with 100 episodes per iteration.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZgt{} start of code}
+         \PY{n}{nS} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{observation\PYZus{}space}\PY{o}{.}\PY{n}{n}
+         \PY{n}{nA} \PY{o}{=} \PY{n}{env}\PY{o}{.}\PY{n}{action\PYZus{}space}\PY{o}{.}\PY{n}{n}
+         \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{)}\PY{p}{)}
+         \PY{n}{improvementsIndex} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{percentSuccesses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{best\PYZus{}success} \PY{o}{=} \PY{l+m+mf}{0.0}
+         \PY{n}{policy} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{randQ} \PY{o}{=} \PY{l+m+mf}{0.000001}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{nS}\PY{p}{,}\PY{n}{nA}\PY{p}{)}
+             \PY{n}{Qtest} \PY{o}{=} \PY{n}{Q} \PY{o}{+} \PY{n}{randQ}
+             
+             \PY{n}{test\PYZus{}policy} \PY{o}{=} \PY{n}{getPolicyFromQ}\PY{p}{(}\PY{n}{Qtest}\PY{p}{)}
+             \PY{n}{test\PYZus{}success} \PY{o}{=} \PY{n}{testPolicy}\PY{p}{(}\PY{n}{env}\PY{p}{,} \PY{n}{test\PYZus{}policy}\PY{p}{)}
+         
+             \PY{k}{if} \PY{n}{test\PYZus{}success}\PY{o}{\PYZgt{}}\PY{n}{best\PYZus{}success}\PY{p}{:}
+                 \PY{n}{best\PYZus{}success} \PY{o}{=} \PY{n}{test\PYZus{}success}
+                 \PY{n}{Q} \PY{o}{=} \PY{n}{Qtest}
+                 \PY{n}{policy} \PY{o}{=} \PY{n}{test\PYZus{}policy}
+                 \PY{n}{improvementsIndex}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                 \PY{n}{percentSuccesses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}success}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZpc{}\PYZpc{} \PYZlt{}\PYZhy{}\PYZhy{}\PYZhy{} end of code}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{improvementsIndex}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{percentSuccesses}\PY{p}{)}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{improvementsIndex}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{improvementsIndex}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} E}\PY{l+s+s1}{pisodes Successful}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hill Climbing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{policy}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{: Hill\PYZhy{}climbing policy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(array([3, 3, 0, 1, 0, 2, 2, 0, 1, 1, 0, 1, 0, 2, 1, 2]), ': Hill-climbing policy')
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
